@@ -60,10 +60,10 @@ const Navbar = () => {
           {/*                   LOGO                    */}
           {/* ----------------------------------------- */}
           <div className="flex justify-center items-center">
-            <img className="h-10" src="https://i.ibb.co/jLtcMKC/teal.png" alt="" />
+            <img className="h-5 md:h-10" src="https://i.ibb.co/jLtcMKC/teal.png" alt="" />
             <div className="font-bold  ">
-                <h1 className="text-teal-600 font-display font-extrabold text-xl">Elite Estate</h1>
-                <h1 className="text-slate-700 -mt-2 text-base">Discoveries</h1>
+                <h1 className="text-teal-600 font-display md:font-extrabold text-[9px] md:text-xl">Elite Estate</h1>
+                <h1 className="text-slate-700 -mt-2 text-[8px] md:text-base">Discoveries</h1>
             </div>
           </div>
 
