@@ -5,19 +5,19 @@ const navLink = (
     <div className="flex lg:flex-row flex-col lg:py-0 ">
       <Link
         to="/"
-        className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-500"
+        className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
       >
         Home
       </Link>
       <Link
         to="/addjobs"
-        className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-500"
+        className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
       >
         All Properties
       </Link>
       <Link
         to={`/mypostedjob`}
-        className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-500"
+        className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
       >
         Dashboard
       </Link>
