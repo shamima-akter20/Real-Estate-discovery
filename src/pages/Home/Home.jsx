@@ -2,6 +2,7 @@
 import Advertisement from "./Advertise/Advertisement";
 import Banner from "./Banner";
 import Collection from "./Collection";
+import PopularPlace from "./PopularPlace";
 import Review from "./Review";
 
 const Home = () => {
@@ -11,6 +12,7 @@ const Home = () => {
            <Advertisement></Advertisement>
            <Collection></Collection>
            <Review></Review>
+           <PopularPlace></PopularPlace>
         </div>
     );
 };

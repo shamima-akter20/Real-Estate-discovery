@@ -1,4 +1,4 @@
-import React from 'react';
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -94,6 +94,8 @@ const Review = () => {
                   </div>
              </div>
              <div className="flex gap-4">
+
+
                  <img className="h-40 w-24 rounded" src="https://i.ibb.co/SPp3JP6/person4.jpg" alt="" />
                   <div className="flex flex-col justify-center text-slate-500">
                   <h1 className="font-display  text-lg">Will  Worth </h1>
