@@ -4,6 +4,7 @@ import Banner from "./Banner";
 import Collection from "./Collection";
 import PopularPlace from "./PopularPlace";
 import Review from "./Review";
+import Sell from "./Sell";
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
            <Collection></Collection>
            <Review></Review>
            <PopularPlace></PopularPlace>
+           <Sell></Sell>
         </div>
     );
 };
