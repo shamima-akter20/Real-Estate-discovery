@@ -10,13 +10,13 @@ const navLink = (
         Home
       </Link>
       <Link
-        to="/addjobs"
+        to="/allProperty"
         className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
       >
         All Properties
       </Link>
       <Link
-        to={`/mypostedjob`}
+        // to={`/mypostedjob`}
         className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
       >
         Dashboard

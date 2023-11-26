@@ -3,8 +3,9 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    './src/**/*.{js,jsx,ts,tsx}',
     "./src/**/*.{html,js}",
-    "node_modules/keep-react/**/*.{js,jsx,ts,tsx}"
+    'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
   theme: {
     extend: {
@@ -13,7 +14,7 @@ export default {
       }
     },
   },
-  plugins: [require("daisyui") ],
+  plugins: [require("daisyui"), require('flowbite/plugin') ],
   // presets: [keepPreset],
  
 }
