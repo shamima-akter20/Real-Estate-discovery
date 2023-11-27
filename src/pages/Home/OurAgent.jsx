@@ -26,7 +26,7 @@ const OurAgent = () => {
               Marie Jane
             </h2>
             <h5 className="block  font-sans text-lg antialiased font-semibold leading-snug tracking-normal text-gray-400">
-              CEO
+              Manager
             </h5>
           </div>
         </div>

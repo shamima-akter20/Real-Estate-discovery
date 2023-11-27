@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const AllProperties = () => {
   return (
     <div>
@@ -12,7 +14,11 @@ const AllProperties = () => {
       </div>
 
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-8">
+       <div className="flex justify-center">
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+          gap-6  xl:grid-cols-4 py-8">
+        
+        
         <div className="relative flex max-w-[24rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
           <div className="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
             <img
@@ -20,49 +26,113 @@ const AllProperties = () => {
               alt="ui/ux review check"
             />
           </div>
-          <div className="px-6 py-2">
+          <div className="px-6 pt-2">
             <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
               Property Title :
             </h4>
-            <h1>Location :</h1>
-            <p className="block mt-3 font-sans text-xl antialiased font-normal leading-relaxed text-gray-700">
-              Because it is about motivating the doers. Because I am here to
-              follow my dreams and inspire others.
+            <p className="block  font-sans text-xl antialiased font-normal leading-relaxed text-gray-700">
+            <i className="fa-solid fa-dollar-sign"></i> Price :
             </p>
+            <h1> <i className="fa-solid fa-location-dot"></i> Location :</h1>
+            <h1>Varification Status:</h1>
           </div>
           <div className="flex items-center justify-between p-6">
-            <div className="flex items-center -space-x-3">
-              <img
-                alt="natali craig"
-                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1061&amp;q=80"
-                className="relative inline-block object-cover object-center border-2 border-white rounded-full h-9 w-9 hover:z-10"
-                data-tooltip-target="author-1"
-              />
-              <div
-                data-tooltip="author-1"
-                className="absolute z-50 whitespace-normal break-words rounded-lg bg-black py-1.5 px-3 font-sans text-sm font-normal text-white focus:outline-none"
-              >
-                Natali Craig
-              </div>
-              <img
-                alt="tania andrew"
-                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
-                className="relative inline-block object-cover object-center border-2 border-white rounded-full h-9 w-9 hover:z-10"
-                data-tooltip-target="author-2"
-              />
-              <div
-                data-tooltip="author-2"
-                className="absolute z-50 whitespace-normal break-words rounded-lg bg-black py-1.5 px-3 font-sans text-sm font-normal text-white focus:outline-none"
-              >
-                Tania Andrew
-              </div>
-            </div>
-            <p className="block font-sans text-base antialiased font-normal leading-relaxed text-inherit">
-              January 10
-            </p>
+           <div className="flex justify-center items-center gap-2 ">
+            <img className="h-10 w-10 rounded-full" src="https://i.ibb.co/30ZghNN/kkk.jpg" alt="" />
+            <h1 className="font-bold font-display">Locky Jane</h1>
+           </div>
           </div>
+          <Link    className="px-6 pb-4">
+            <button className="btn btn-accent w-full"> Detail</button>
+          </Link>
         </div>
+
+        <div className="relative flex max-w-[24rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+          <div className="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
+            <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
+              alt="ui/ux review check"
+            />
+          </div>
+          <div className="px-6 pt-2">
+            <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+              Property Title :
+            </h4>
+            <p className="block  font-sans text-xl antialiased font-normal leading-relaxed text-gray-700">
+            <i className="fa-solid fa-dollar-sign"></i> Price :
+            </p>
+            <h1> <i className="fa-solid fa-location-dot"></i> Location :</h1>
+            <h1>Varification Status:</h1>
+          </div>
+          <div className="flex items-center justify-between p-6">
+           <div className="flex justify-center items-center gap-2 ">
+            <img className="h-10 w-10 rounded-full" src="https://i.ibb.co/30ZghNN/kkk.jpg" alt="" />
+            <h1 className="font-bold font-display">Locky Jane</h1>
+           </div>
+          </div>
+          <Link    className="px-6 pb-4">
+            <button className="btn btn-accent w-full"> Detail</button>
+          </Link>
+        </div>
+
+        <div className="relative flex max-w-[24rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+          <div className="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
+            <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
+              alt="ui/ux review check"
+            />
+          </div>
+          <div className="px-6 pt-2">
+            <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+              Property Title :
+            </h4>
+            <p className="block  font-sans text-xl antialiased font-normal leading-relaxed text-gray-700">
+            <i className="fa-solid fa-dollar-sign"></i> Price :
+            </p>
+            <h1> <i className="fa-solid fa-location-dot"></i> Location :</h1>
+            <h1>Varification Status:</h1>
+          </div>
+          <div className="flex items-center justify-between p-6">
+           <div className="flex justify-center items-center gap-2 ">
+            <img className="h-10 w-10 rounded-full" src="https://i.ibb.co/30ZghNN/kkk.jpg" alt="" />
+            <h1 className="font-bold font-display">Locky Jane</h1>
+           </div>
+          </div>
+          <Link    className="px-6 pb-4">
+            <button className="btn btn-accent w-full"> Detail</button>
+          </Link>
+        </div>
+
+        <div className="relative flex max-w-[24rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+          <div className="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
+            <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
+              alt="ui/ux review check"
+            />
+          </div>
+          <div className="px-6 pt-2">
+            <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+              Property Title :
+            </h4>
+            <p className="block  font-sans text-xl antialiased font-normal leading-relaxed text-gray-700">
+            <i className="fa-solid fa-dollar-sign"></i> Price :
+            </p>
+            <h1> <i className="fa-solid fa-location-dot"></i> Location :</h1>
+            <h1>Varification Status:</h1>
+          </div>
+          <div className="flex items-center justify-between p-6">
+           <div className="flex justify-center items-center gap-2 ">
+            <img className="h-10 w-10 rounded-full" src="https://i.ibb.co/30ZghNN/kkk.jpg" alt="" />
+            <h1 className="font-bold font-display">Locky Jane</h1>
+           </div>
+          </div>
+          <Link    className="px-6 pb-4">
+            <button className="btn btn-accent w-full"> Detail</button>
+          </Link>
+        </div>
+
       </div>
+       </div>
     </div>
   );
 };
