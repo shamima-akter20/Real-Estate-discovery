@@ -5,20 +5,20 @@ AOS.init();
 
 const Collection = () => {
   return (
-    <div className=' py-4'>
+    <div className=' py-4 flex flex-col justify-center items-center mx-auto'>
       <div className="border-5 border-l-8 border-teal-600 px-6">
         <h1 className="text-2xl md:text-4xl font-display text-teal-600">
           What are you looking for?{" "}
         </h1>
         <p className="text-xs md:text-base">
-          Find your perfect home effortlessly with our 'What Are You Looking
+          Find your perfect home effortlessly with our What Are You Looking
           For feature.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-8 py-10 bg-slate-100">
 
-        <div className="card w-full bg-base-100 shadow-xl"  data-aos="fade-left">
+        <div className="card w-full bg-base-100 shadow-xl"  data-aos="fade-down">
           <div className="card-body">
             <div className="flex justify-center text-center">
                <img className="h-14 w-14 " src="https://i.ibb.co/bF9yDtb/apartment.png" alt="" />    
@@ -28,7 +28,7 @@ const Collection = () => {
           </div>
         </div>
 
-        <div className="card w-full bg-base-100 shadow-xl"  data-aos="fade-left" >
+        <div className="card w-full bg-base-100 shadow-xl"  data-aos="fade-down" >
           <div className="card-body">
             <div className="flex justify-center text-center">
                <img className=" w-20 " src="https://i.ibb.co/xJBBWyT/house.png" alt="" />    
@@ -38,7 +38,7 @@ const Collection = () => {
           </div>
         </div>
 
-        <div className="card w-full bg-base-100 shadow-xl"  data-aos="fade-left">
+        <div className="card w-full bg-base-100 shadow-xl"  data-aos="fade-down">
           <div className="card-body">
             <div className="flex justify-center text-center">
                <img className="h-14 w-14 " src="https://i.ibb.co/D9jV4Rv/market.png" alt="" />    
@@ -48,7 +48,7 @@ const Collection = () => {
           </div>
         </div>
 
-        <div className="card w-full bg-base-100 shadow-xl"  data-aos="fade-left">
+        <div className="card w-full bg-base-100 shadow-xl"  data-aos="fade-down">
           <div className="card-body">
             <div className="flex justify-center text-center">
                <img className="h-14 w-14 " src="https://i.ibb.co/GdTXB8M/garage.png" alt="" />    

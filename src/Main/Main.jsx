@@ -9,10 +9,12 @@ const Main = () => {
     const noHeaderFooter = location.pathname.includes('login') || location.pathname.includes('signin') ;
 
     return (
-        <div className='mx-6 md:mx-16 lg:mx-32 '>
+        <div>
             {noHeaderFooter || <Navbar></Navbar>}
-            <Outlet></Outlet>
+          <div className='mx-6 md:mx-16 lg:mx-32 '>
+          <Outlet></Outlet>
             {noHeaderFooter || <Footer></Footer>}
+          </div>
         </div>
     );
 };

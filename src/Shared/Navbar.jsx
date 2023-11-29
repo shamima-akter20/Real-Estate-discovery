@@ -1,52 +1,49 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
-const navLink = (
-  <>
-    <div className="flex lg:flex-row flex-col lg:py-0 ">
-      <Link
-        to="/"
-        className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
-      >
-        Home
-      </Link>
-      <Link
-        to="/allProperty"
-        className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
-      >
-        All Properties
-      </Link>
-      <Link
-        to='/dashboard'
-        className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
-      >
-        Dashboard
-      </Link>
-
-    </div>
-  </>
-);
+import { AuthContext } from "../Authentication/AuthProvider";
 
 const Navbar = () => {
+  const {user, logOut} = useContext(AuthContext);
+  const handleLogOut = () =>{
+    logOut()
+    .then(() =>{})
+    .catch(error => console.log(error));
+  }
+
+  const navLink = (
+    <>
+      <div className="flex lg:flex-row flex-col lg:py-0 ">
+        <Link
+          to="/"
+          className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
+        >
+          Home
+        </Link>
+        <Link
+          to="/allProperty"
+          className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
+        >
+          All Properties
+        </Link>
+        <Link
+          to='/dashboard'
+          className="lg:py-0 text-center lg:px-3 hover:text-slate-400 rounded-3xl  py-1 font-bold text-teal-600"
+        >
+          Dashboard
+        </Link>
+  
+      </div>
+    </>
+  );
+
+
   return (
-    <div>
+    <div className="mr-6 md:mx-12 lg:mx-32">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
+              <i className="fa-solid fa-bars text-teal-600 text-2xl"></i>
             </label>
             <ul
               tabIndex={0}
@@ -71,10 +68,38 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
+
+       
+        
         <div className="navbar-end">
+
+          {/* User Image and name */}
+          {user && (
+            <div
+              className="flex justify-center items-center 
+      px-2 rounded-3xl  gap-2"
+            >
+              <img
+                className="h-6 w-6 rounded-full"
+                src={user?.photoURL
+                }
+                alt=""
+              />
+              {/* <h5 className="hidden md:inline  justify-center items-center">
+                {user.displayName}
+              </h5> */}
+            </div>
+          )}
+
+
+         {
+          user ?
+          <button onClick={handleLogOut} className="btn btn-outline btn-accent btn-sm">logOut</button>
+          :
           <Link to="/login">
           <button className="btn btn-outline btn-accent btn-sm">login</button>
           </Link>
+         }
         </div>
       </div>
     </div>

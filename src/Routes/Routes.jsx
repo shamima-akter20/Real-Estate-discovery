@@ -1,6 +1,7 @@
 
 import { createBrowserRouter } from 'react-router-dom';
 import Login from '../Authentication/Login';
+import PrivateRoute from '../Authentication/PrivateRoute';
 import SignIn from '../Authentication/SignIn';
 import Dashboard from '../Dashboard/Dashboard';
 import MyProfile from '../Dashboard/Dashpage/MyProfile';
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/allProperty',
-                element:<AllProperties></AllProperties>  ,
+                element:<PrivateRoute><AllProperties></AllProperties></PrivateRoute>  ,
             },
             {
                 path:'/login',

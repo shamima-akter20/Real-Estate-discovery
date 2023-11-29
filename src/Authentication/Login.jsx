@@ -1,23 +1,44 @@
 import Lottie from "lottie-react";
-import { useContext, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
+import Swal from "sweetalert2";
 import { AuthContext } from "./AuthProvider";
 import login from "./login.json";
 
 const Login = () => {
-  const captchaRef = useRef(null);
+  // const captchaRef = useRef(null);
+  const [loginError, setLoginError] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const { signIn,googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const { signIn } = useContext(AuthContext);
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
+
+  //google signin
+  const handleGooglelogIn = () => {
+    googleSignIn()
+    .then(result =>{
+      console.log(result.user)
+      //nevigate after login
+      navigate(from, { replace: true });
+      Swal.fire(
+        'Logged In!',
+        'You logged in successfully with Google!',
+        'success'
+      )
+    })
+    
+  }
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -25,14 +46,41 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    signIn(email, password).then((result) => {
+    //set login error
+    setLoginError('');
+
+    //login
+    signIn(email, password)
+    .then((result) => {
       const user = result.user;
       console.log(user);
-    });
+      Swal.fire({
+        title: "Login Successfully",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
+      navigate(from, { replace: true });
+    }) .catch(error =>{
+      console.error(error);
+      setLoginError(error.message)
+    })
+
   };
 
-  const handleValidateRecapcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateRecapcha = (e) => {
+    const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
     } else {
@@ -63,7 +111,7 @@ const Login = () => {
 
          <div className="flex-1 justify-center px-4 md:px-12">
          <div className="  bg-teal-200 bg-opacity-60">
-            <form className="card-body" onSubmit={handleLogin}>
+            <form className="px-12 pt-10 pb-4" onSubmit={handleLogin}>
               {/* -------- email -------- */}
               <div className="form-control"> 
 
@@ -101,20 +149,15 @@ const Login = () => {
                 <label className="label">
                   <LoadCanvasTemplate />
                 </label>
-                <input
+                <input  onBlur={handleValidateRecapcha}
                   type="text"
-                  ref={captchaRef}
+                 
                   name="captcha"
                   placeholder="Type the text above"
                   className="input input-bordered"
                   required
                 />
-                <button
-                  onClick={handleValidateRecapcha}
-                  className="btn btn-xs btn-outline mt-2"
-                >
-                  Validate
-                </button>
+               
               </div>
 
               <div className="form-control mt-6">
@@ -125,6 +168,21 @@ const Login = () => {
                 </button>
               </div>
             </form>
+            <div className="text-center pb-2">
+              {
+                loginError && <p className="text-base text-red-600 font-bold">
+                  Incorrect Email or Password </p>
+              }
+             </div>
+
+            <div className="flex pb-6 justify-center">  
+              <button 
+              onClick={handleGooglelogIn}
+               className="btn btn-ghost font-bold ">
+              <img className="h-8" src="https://i.ibb.co/tJMpW3j/icons8-google-48.png" alt="" />
+               Google Login 
+             </button>
+            </div> 
 
             <p className="text-center pb-6">
               New here? Create an
