@@ -9,9 +9,9 @@ const PrivateRoute = ({children}) => {
     const location = useLocation();
 
     if(loading){
-        return <div>
+        return <div className="flex justify-center items-center my-16">
             <RotatingLines
-                strokeColor="grey"
+                strokeColor="teal"
                 strokeWidth="5"
                 animationDuration="0.75"
                 width="96"

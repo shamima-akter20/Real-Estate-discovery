@@ -5,7 +5,7 @@ AOS.init();
 
 const Collection = () => {
   return (
-    <div className=' py-4 flex flex-col justify-center items-center mx-auto'>
+    <div className=' py-4 flex flex-col justify-center mx-auto'>
       <div className="border-5 border-l-8 border-teal-600 px-6">
         <h1 className="text-2xl md:text-4xl font-display text-teal-600">
           What are you looking for?{" "}

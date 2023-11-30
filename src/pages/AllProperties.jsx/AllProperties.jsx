@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const AllProperties = () => {
   return (
     <div>
+      <Helmet>
+        <title>All Properties - Elite Estate Discoveries</title>
+      </Helmet>
 
       <div className="border-5 border-l-8 border-teal-600 px-6">
         <h1 className="text-2xl md:text-4xl font-display text-teal-600">
