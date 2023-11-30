@@ -3,14 +3,15 @@ import { createBrowserRouter } from 'react-router-dom';
 import Login from '../Authentication/Login';
 import PrivateRoute from '../Authentication/PrivateRoute';
 import SignIn from '../Authentication/SignIn';
+import Whishlist from '../Dashboard/AddWhishlist/Whishlist';
 import Dashboard from '../Dashboard/Dashboard';
+import Brought from '../Dashboard/Dashpage/Brought';
 import MyProfile from '../Dashboard/Dashpage/MyProfile';
-import MyReview from '../Dashboard/MyReview';
-import ProBrought from '../Dashboard/ProBrought';
-import Whishlist from '../Dashboard/Whishlist';
+import Review from '../Dashboard/Dashpage/Review';
 import AllProperties from '../pages/AllProperties.jsx/AllProperties';
 import PropertyDetail from '../pages/Home/Advertise/PropertyDetail';
 import Home from '../pages/Home/Home';
+import MakeAnOffer from './../Dashboard/AddWhishlist/MakeAnOffer';
 import Main from './../Main/Main';
 
 const router = createBrowserRouter([
@@ -55,11 +56,15 @@ const router = createBrowserRouter([
             },
             {
                 path:'propertyBrought',
-                element:<ProBrought></ProBrought> ,
+                element:<Brought></Brought> ,
             },
             {
                 path:'myReview',
-                element:<MyReview></MyReview> ,
+                element:<Review></Review> ,
+            },
+            {
+                path:'makeOffer',
+                element:<MakeAnOffer></MakeAnOffer> ,
             },
         ]
     }

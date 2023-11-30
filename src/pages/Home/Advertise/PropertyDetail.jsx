@@ -16,8 +16,8 @@ const PropertyDetail = () => {
 
       <div className=" py-8 px-10 md:px-16 ">
 
-        <div className=" flex xl:gap-12 rounded-xl text-gray-700 shadow-md w-full  flex-col md:flex-row">
-           <div className="md:w-3/4 xl:w-2/5">
+        <div className=" flex  rounded-xl text-gray-700 shadow-md w-full  flex-col md:flex-row">
+           <div className="md:w-3/4  xl:w-2/5">
            <img
               src="https://i.ibb.co/k5PBTR1/e2.jpg"
               className="bg-cover w-full h-full"
@@ -25,7 +25,7 @@ const PropertyDetail = () => {
            </div>
          
           <div className="p-6">
-            <h6 className="mb-2 font-bold  text-xl xl:text-2xl antialiased leading-relaxed tracking-normal text-gray-700 ">
+            <h6 className="mb-2 font-bold  text-xl antialiased leading-relaxed tracking-normal text-gray-700 ">
               Title
             </h6>
             <p className="block mb-2 font-sans text-xs md:text-base antialiased  leading-relaxed text-gray-500">
