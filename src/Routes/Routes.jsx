@@ -8,6 +8,11 @@ import Dashboard from '../Dashboard/Dashboard';
 import Brought from '../Dashboard/Dashpage/Brought';
 import MyProfile from '../Dashboard/Dashpage/MyProfile';
 import Review from '../Dashboard/Dashpage/Review';
+import AgentAddedProperties from '../Dashboard/agent/AgentAddedProperties';
+import AgentProfile from '../Dashboard/agent/AgentProfile';
+import AgentSoldProperties from '../Dashboard/agent/AgentSoldProperties';
+import RequestedProperties from '../Dashboard/agent/RequestedProperties';
+import Update from '../Dashboard/agent/Update';
 import AllProperties from '../pages/AllProperties.jsx/AllProperties';
 import PropertyDetail from '../pages/Home/Advertise/PropertyDetail';
 import Home from '../pages/Home/Home';
@@ -46,6 +51,7 @@ const router = createBrowserRouter([
         path:'dashboard',
         element: <Dashboard></Dashboard>,
         children:[
+            /*********** user routes ************* */
             {
                 path:'MyProfile',
                 element:<MyProfile></MyProfile>,
@@ -66,6 +72,27 @@ const router = createBrowserRouter([
                 path:'makeOffer',
                 element:<MakeAnOffer></MakeAnOffer> ,
             },
+            /**********  agent routes ************** */
+           {
+            path: 'agentProfile',
+            element: <AgentProfile/>,
+           },
+           {
+            path: 'agentAddedProperties',
+            element: <AgentAddedProperties></AgentAddedProperties>,
+           },
+           {
+            path: 'AgentSoldProperties',
+            element: <AgentSoldProperties></AgentSoldProperties>,
+           },
+           {
+            path: 'requestedProperties',
+            element: <RequestedProperties></RequestedProperties>
+           },
+           {
+            path: 'update',
+            element:<Update></Update>
+           },
         ]
     }
 ])

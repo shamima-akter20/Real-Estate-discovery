@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import LoadingSpiner from "../../../components/LoadingSpiner";
+import useGetProperties from "../../../hooks/properties/useGetProperties";
 
 
 const Advertisement = () => {
-  const [advertise, setAdvertise] = useState([]);
-  useEffect(() => {
-    fetch('ADD.json')
-    .then(res => res.json())
-    .then(data => setAdvertise(data))
-  }, [])
+
+
+  const {data:advertise = [], isPending} = useGetProperties()
+  // achen naki ? accha loading spnieer banaisen ?hae koi ?
+
+if(isPending) return <LoadingSpiner/>
 
   console.log(advertise);
     return (
