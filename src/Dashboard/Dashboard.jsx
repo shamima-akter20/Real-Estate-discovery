@@ -1,12 +1,12 @@
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-  const role = "agent"; 
+  const role = "admin"; 
   return (
     <div className="flex mx-4 md:mx-8 lg:mx-16 xl:mx-36 ">
       <div className="w-46 min-h-full bg-teal-100 text-teal-600 font-bold rounded-b-2xl">
         {role === "admin" ? (
-          /****** admin route********** */
+          /****** admin buirar route********** */
           <ul className="menu text-xs md:text-base lg:text-lg p-4">
             <li>
               <NavLink to="/dashboard/adminProfile">
@@ -14,18 +14,18 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/agentAddedProperties">
-                <i className="fa-solid fa-list-ul"></i> My Added Properties
+              <NavLink to="/dashboard/manageProperties">
+                <i className="fa-solid fa-list-ul"></i> Manage Properties
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/propertyBrought">
-                <i className="fa-solid fa-cart-shopping"></i> Property bought
+              <NavLink to="/dashboard/manageReview">
+                <i className="fa-solid fa-cart-shopping"></i> Manage Review
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/myReview">
-                <i className="fa-regular fa-paste"></i> My reviews
+              <NavLink to="/dashboard/manageUsers">
+                <i className="fa-regular fa-paste"></i> Manage Users
               </NavLink>
             </li>
 

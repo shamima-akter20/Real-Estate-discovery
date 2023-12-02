@@ -4,6 +4,10 @@ import Login from '../Authentication/Login';
 import PrivateRoute from '../Authentication/PrivateRoute';
 import SignIn from '../Authentication/SignIn';
 import Whishlist from '../Dashboard/AddWhishlist/Whishlist';
+import AdminProfile from '../Dashboard/Admin/AdminProfile';
+import ManageProperties from '../Dashboard/Admin/ManageProperties';
+import ManageReview from '../Dashboard/Admin/ManageReview';
+import ManageUsers from '../Dashboard/Admin/ManageUsers';
 import Dashboard from '../Dashboard/Dashboard';
 import Brought from '../Dashboard/Dashpage/Brought';
 import MyProfile from '../Dashboard/Dashpage/MyProfile';
@@ -29,7 +33,7 @@ const router = createBrowserRouter([
                 element:<Home></Home>,
             },
             {
-                path:'/propertyDetail',
+                path:'/propertyDetail/:id',
                 element:<PropertyDetail></PropertyDetail> ,
             },
             {
@@ -92,6 +96,23 @@ const router = createBrowserRouter([
            {
             path: 'update',
             element:<Update></Update>
+           },
+        //++++++++++++++++++++++++++++++++  admin betar route  +++++++++++++++++++++++++++++++
+           {
+            path: 'adminProfile',
+            element: <AdminProfile></AdminProfile>  ,
+           },
+           {
+            path: 'manageProperties',
+            element: <ManageProperties></ManageProperties>  ,
+           },
+           {
+            path: 'manageReview',
+            element: <ManageReview></ManageReview> ,
+           },
+           {
+            path: 'manageUsers',
+            element: <ManageUsers></ManageUsers> ,
            },
         ]
     }

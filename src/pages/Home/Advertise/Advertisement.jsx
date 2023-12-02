@@ -40,7 +40,7 @@ if(isPending) return <LoadingSpiner/>
               <i className="fa-solid fa-dollar-sign mr-2"></i>Price : {item.price}
               </h3>
               <div className="card-actions justify-start">
-                <Link to="/propertyDetail">
+                <Link to={`/propertyDetail/${item._id}`}>
                 <button className="btn btn-outline btn-accent btn-sm">Details</button>
                 </Link>
               </div>

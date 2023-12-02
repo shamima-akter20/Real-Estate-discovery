@@ -1,12 +1,22 @@
 import { useContext } from "react";
+import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Authentication/AuthProvider";
+import LoadingSpiner from "../../components/LoadingSpiner";
+import useGetAUser from "../../hooks/users/useGetAuser";
 
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
   console.log(user);
 
+  const {data, isPending} = useGetAUser(user?.email)
+
+  if(isPending) return <LoadingSpiner/>
+console.log(data);
   return (
     <div className="pt-10 px-4 md:px-8">
+       <Helmet>
+        <title>User Profile - Elite Estate Discoveries</title>
+      </Helmet>
       <div className="border-5 border-l-8 border-teal-600 px-6">
         <h1 className="text-2xl md:text-4xl font-display text-teal-600">
           My Profile

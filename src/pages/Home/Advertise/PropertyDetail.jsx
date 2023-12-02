@@ -1,7 +1,15 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import LoadingSpiner from "../../../components/LoadingSpiner";
+import useGetAProperties from "../../../hooks/properties/useGetAproperty";
 
 const PropertyDetail = () => {
+  const params = useParams()
+  console.log(params);
+  const {data={}, isPending} = useGetAProperties(params.id)
+
+  if(isPending) return <LoadingSpiner/>
+  console.log(data);
   return (
     <div className="">
       <Helmet>
