@@ -1,15 +1,65 @@
+import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../../../Authentication/AuthProvider";
 import LoadingSpiner from "../../../components/LoadingSpiner";
 import useGetAProperties from "../../../hooks/properties/useGetAproperty";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const PropertyDetail = () => {
-  const params = useParams()
-  console.log(params);
-  const {data={}, isPending} = useGetAProperties(params.id)
+  const params = useParams();
+  // console.log(params);
+  const axiosSecure = useAxiosSecure();
+  const { user } = useContext(AuthContext);
+  const { data = {}, isPending } = useGetAProperties(params.id);
+  const navigate = useNavigate();
 
-  if(isPending) return <LoadingSpiner/>
-  console.log(data);
+  // const {
+  //   data: addWish,
+  //   mutate,
+  //   status,
+  // } = useMutation({
+  //   mutationKey: ["addtoWishlist"],
+  //   mutationFn: async (wishData) => {
+  //     const res = await axiosSecure.post("/wishlists", wishData);
+  //     return res.data;
+  //   },
+  // });
+
+  if (isPending) return <LoadingSpiner />;
+  // uporer data gulo ki bosaysen Ui te ?
+  // console.log(Object.keys(data).join(','));
+  const {
+    _id,
+    image,
+    verification_status,
+    price,
+    location,
+    propertyTitle,
+    propertyDescription,
+    agentName,
+    agentEmail,
+    agentImage,
+    propertyDetails,
+    reviews,
+  } = data;
+
+  const handleAddWishlist = () => {
+    const wishData = {
+      userName: user?.displayName,
+      userEmail: user?.email,
+      propertyId: _id,
+    };
+
+    axiosSecure.post("/wishlists", wishData).then((res) => {
+      console.log("inserted wishlist", res.data);
+      if (res.data?.insertedId) {
+        alert("wishlist added");
+        navigate("/dashboard/whishlist");
+      }
+    });
+  };
+
   return (
     <div className="">
       <Helmet>
@@ -23,25 +73,21 @@ const PropertyDetail = () => {
       </div>
 
       <div className=" py-8 px-10 md:px-16 ">
-
         <div className=" flex  rounded-xl text-gray-700 shadow-md w-full  flex-col md:flex-row">
-           <div className="md:w-3/4  xl:w-2/5">
-           <img
-              src="https://i.ibb.co/k5PBTR1/e2.jpg"
-              className="bg-cover w-full h-full"
-            />
-           </div>
-         
+          <div className="md:w-3/4  xl:w-2/5">
+            <img src={image} className="bg-cover w-full h-full" />
+          </div>
+
           <div className="p-6">
             <h6 className="mb-2 font-bold  text-xl antialiased leading-relaxed tracking-normal text-gray-700 ">
-              Title
+              {propertyTitle}
             </h6>
             <p className="block mb-2 font-sans text-xs md:text-base antialiased  leading-relaxed text-gray-500">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Repudiandae, similique!
+              {propertyDescription}
             </p>
             <p className=" font-sans text-xs md:text-base antialiased  text-gray-500">
-              <i className="fa-solid fa-dollar-sign mr-2"></i> Price range :
+              <i className="fa-solid fa-dollar-sign mr-2"></i> Price range : $
+              {price}
             </p>
 
             <div className="flex items-center gap-2 mb-2 mt-2 bg-slate-100 w-36 p-2 rounded-2xl ">
@@ -53,16 +99,16 @@ const PropertyDetail = () => {
               <h1 className="text-xs font-display">Locky Jane</h1>
             </div>
 
-            <Link to="/dashboard/whishlist" > 
-            <button className="btn btn-sm btn-outline btn-accent">Add to Wishlist</button> 
-            </Link>
-
+            {/* <Link to="/dashboard/whishlist"> */}
+            <button
+              onClick={handleAddWishlist}
+              className="btn btn-sm btn-outline btn-accent"
+            >
+              Add to Wishlist
+            </button>
+            {/* </Link> */}
           </div>
         </div>
-     
-       
-      
-        
       </div>
     </div>
   );

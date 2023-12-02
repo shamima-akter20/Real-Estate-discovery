@@ -21,6 +21,7 @@ import AllProperties from '../pages/AllProperties.jsx/AllProperties';
 import PropertyDetail from '../pages/Home/Advertise/PropertyDetail';
 import Home from '../pages/Home/Home';
 import MakeAnOffer from './../Dashboard/AddWhishlist/MakeAnOffer';
+import AddReview from './../Dashboard/Dashpage/AddReview';
 import Main from './../Main/Main';
 
 const router = createBrowserRouter([
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
            {
             path: 'manageUsers',
             element: <ManageUsers></ManageUsers> ,
+           },
+           {
+            path: 'addReview',
+            element: <AddReview></AddReview> ,
            },
         ]
     }
