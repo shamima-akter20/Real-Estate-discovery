@@ -7,6 +7,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import Swal from "sweetalert2";
+import axiosPublic from "../config/axios.config";
 import { AuthContext } from "./AuthProvider";
 import login from "./login.json";
 
@@ -26,20 +27,29 @@ const Login = () => {
 
   //google signin
   const handleGooglelogIn = () => {
-    googleSignIn()
-    .then(result =>{
-      console.log(result.user)
+    googleSignIn().then((result) => {
+      const loggedUser = result.user;
       //nevigate after login
-      navigate(from, { replace: true });
-      Swal.fire(
-        'Logged In!',
-        'You logged in successfully with Google!',
-        'success'
-      )
-    })
-    
-  }
+      const userInfo = {
+        name: loggedUser?.displayName,
+        email: loggedUser?.email,
+        photoURL: loggedUser?.photoURL,
+        role: "user",
+        status: "varified",
+      };
 
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res.data);
+       
+        navigate(from, { replace: true });
+        Swal.fire(
+          "Logged In!",
+          "You logged in successfully with Google!",
+          "success"
+        );
+      });
+    });
+  };
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;

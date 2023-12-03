@@ -1,7 +1,16 @@
+import { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { AuthContext } from "../Authentication/AuthProvider";
+import useGetUserRole from "../hooks/useGetUserRole";
 
 const Dashboard = () => {
-  const role = "agent"; 
+  // const role = "agent"; 
+  const {user} = useContext(AuthContext)
+
+  const role = useGetUserRole(user?.email || '')
+
+  console.log(role);
+  
   return (
     <div className="flex mx-4 md:mx-8 lg:mx-16 xl:mx-36 ">
       <div className="w-46 min-h-full bg-teal-100 text-teal-600 font-bold rounded-b-2xl">

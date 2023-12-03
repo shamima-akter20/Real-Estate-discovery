@@ -31,37 +31,46 @@ const SignIn = () => {
   //google signup
   const handleGooglelogIn = () => {
     googleSignIn().then((result) => {
-      console.log(result.user);
+      const loggedUser = result.user;
       //nevigate after login
-      navigate(from, { replace: true });
-      Swal.fire(
-        "Logged In!",
-        "You logged in successfully with Google!",
-        "success"
-      );
+      const userInfo = {
+        name: loggedUser?.displayName,
+        email: loggedUser?.email,
+        photoURL: loggedUser?.photoURL,
+        role: "user",
+        status: "varified",
+      };
+
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res.data);
+        reset();
+        navigate(from, { replace: true });
+        Swal.fire(
+          "Logged In!",
+          "You logged in successfully with Google!",
+          "success"
+        );
+      });
     });
   };
 
   const onSubmit = (data) => {
-  
     createUser(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
         updateUserProfile(data.name, data.photoURL).then(() => {
-        
           const userInfo = {
             name: loggedUser?.displayName,
             email: loggedUser?.email,
             photoURL: loggedUser?.photoURL,
-            role: 'user',
-            status: 'varified'
-          }
+            role: "user",
+            status: "varified",
+          };
 
           console.log(userInfo);
 
-          axiosPublic.post('/users', userInfo)
-          .then(res=> {
+          axiosPublic.post("/users", userInfo).then((res) => {
             console.log(res.data);
             reset();
             Swal.fire({
@@ -70,8 +79,7 @@ const SignIn = () => {
               icon: "success",
             });
             navigate("/");
-          })
-         
+          });
         });
       })
       .catch((error) => {
