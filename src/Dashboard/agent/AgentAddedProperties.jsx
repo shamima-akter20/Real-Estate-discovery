@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../Authentication/AuthProvider";
 import LoadingSpiner from "../../components/LoadingSpiner";
 import useGetProperties from "../../hooks/properties/useGetProperties";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AgentAddedProperties = () => {
   const { user } = useContext(AuthContext);
@@ -12,9 +14,22 @@ const AgentAddedProperties = () => {
     value: user?.email,
   });
 
+  const axiosSecure = useAxiosSecure()
+
   if (isPending) return <LoadingSpiner />;
 
   console.log(data);
+
+  const handleDelete = id => {
+    axiosSecure.delete(`/properties/${id}`)
+    .then(res=> {
+      console.log(res.data);
+      if(res.data.deletedCount){
+        refetch()
+        Swal.fire('Deleted Successful')
+      }
+    })
+  }
 
   return (
     <div className="py-8 px-4 md:px-8">
@@ -74,11 +89,11 @@ const AgentAddedProperties = () => {
               </button>
             </Link>
 
-            <Link to="" className="px-4">
-              <button className="btn btn-sm btn-outline btn-accent">
+     
+              <button onClick={()=> handleDelete(property?._id)} className="btn btn-sm btn-outline btn-accent">
                 Delete
               </button>
-            </Link>
+           
           </div>
         </div>
         ))}

@@ -23,7 +23,6 @@ import PropertyDetail from '../pages/Home/Advertise/PropertyDetail';
 import Home from '../pages/Home/Home';
 import MakeAnOffer from './../Dashboard/AddWhishlist/MakeAnOffer';
 import Main from './../Main/Main';
-import AddReview from './../pages/Home/Advertise/AddReview';
 
 const router = createBrowserRouter([
     {
@@ -36,7 +35,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/propertyDetail/:id',
-                element:<PropertyDetail></PropertyDetail> ,
+                element:<PrivateRoute><PropertyDetail></PropertyDetail></PrivateRoute> ,
             },
             {
                 path:'/allProperty',
@@ -44,7 +43,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/login',
-                element:<Login></Login>,
+                element:<Login></Login> ,
             },
             {
                 path:'/signin',
@@ -52,14 +51,14 @@ const router = createBrowserRouter([
             },
             {
                 path:'addReview',
-                element:<AddReview></AddReview> ,
+                element: <PrivateRoute></PrivateRoute> ,
             },
           
         ]
     },
     {
         path:'dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute> ,
         children:[
             /*********** user routes ************* */
             {

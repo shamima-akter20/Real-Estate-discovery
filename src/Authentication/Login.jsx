@@ -11,7 +11,7 @@ import { AuthContext } from "./AuthProvider";
 import login from "./login.json";
 
 const Login = () => {
-  // const captchaRef = useRef(null);
+ 
   const [loginError, setLoginError] = useState('');
   const [disabled, setDisabled] = useState(true);
   const { signIn,googleSignIn } = useContext(AuthContext);

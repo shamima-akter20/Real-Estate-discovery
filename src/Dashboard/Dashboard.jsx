@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-  const role = "admin"; 
+  const role = "agent"; 
   return (
     <div className="flex mx-4 md:mx-8 lg:mx-16 xl:mx-36 ">
       <div className="w-46 min-h-full bg-teal-100 text-teal-600 font-bold rounded-b-2xl">
