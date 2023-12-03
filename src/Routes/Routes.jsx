@@ -12,6 +12,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import Brought from '../Dashboard/Dashpage/Brought';
 import MyProfile from '../Dashboard/Dashpage/MyProfile';
 import Review from '../Dashboard/Dashpage/Review';
+import AddProperty from '../Dashboard/agent/AddProperty';
 import AgentAddedProperties from '../Dashboard/agent/AgentAddedProperties';
 import AgentProfile from '../Dashboard/agent/AgentProfile';
 import AgentSoldProperties from '../Dashboard/agent/AgentSoldProperties';
@@ -21,8 +22,8 @@ import AllProperties from '../pages/AllProperties.jsx/AllProperties';
 import PropertyDetail from '../pages/Home/Advertise/PropertyDetail';
 import Home from '../pages/Home/Home';
 import MakeAnOffer from './../Dashboard/AddWhishlist/MakeAnOffer';
-import AddReview from './../Dashboard/Dashpage/AddReview';
 import Main from './../Main/Main';
+import AddReview from './../pages/Home/Advertise/AddReview';
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
                 path:'/signin',
                 element:<SignIn></SignIn> ,
             },
+            {
+                path:'addReview',
+                element:<AddReview></AddReview> ,
+            },
           
         ]
     },
@@ -74,7 +79,7 @@ const router = createBrowserRouter([
                 element:<Review></Review> ,
             },
             {
-                path:'makeOffer',
+                path:'makeOffer/:id',
                 element:<MakeAnOffer></MakeAnOffer> ,
             },
             /**********  agent routes ************** */
@@ -95,8 +100,12 @@ const router = createBrowserRouter([
             element: <RequestedProperties></RequestedProperties>
            },
            {
-            path: 'update',
+            path: 'update/:id',
             element:<Update></Update>
+           },
+           {
+            path: 'addProperty',
+            element:<AddProperty></AddProperty>
            },
         //++++++++++++++++++++++++++++++++  admin betar route  +++++++++++++++++++++++++++++++
            {
@@ -115,10 +124,7 @@ const router = createBrowserRouter([
             path: 'manageUsers',
             element: <ManageUsers></ManageUsers> ,
            },
-           {
-            path: 'addReview',
-            element: <AddReview></AddReview> ,
-           },
+         
         ]
     }
 ])

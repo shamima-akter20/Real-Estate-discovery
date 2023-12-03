@@ -24,7 +24,7 @@ if(isPending) return <LoadingSpiner/>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {
             advertise.map(item =>
-              <div key={item.id} className="card card-compact w-full bg-base-100 shadow-xl">
+              <div key={item?._id} className="card card-compact w-full bg-base-100 shadow-xl">
             <figure>
               
               <img className="h-56 w-full"

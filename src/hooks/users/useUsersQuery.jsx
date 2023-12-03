@@ -1,14 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../useAxiosSecure';
 
-export default function useReviews(query) {
-
+export default function useUsersQuery(query) {
     const axiosSecure = useAxiosSecure()
 
     const {data, isPending, refetch} = useQuery({
-        queryKey: ['getReviews', query],
+        queryKey: ['getAllUsers', query],
         queryFn: async()=>{
-            const url = query ? `/reviews?${query?.key}=${query?.value}` : `/reviews`
+            const url = query ? `/users?${query?.key}=${query?.value}` : `/users`
             const res = await axiosSecure.get(url)
             return res.data;
         }

@@ -1,6 +1,16 @@
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const AddReview = () => {
+
+    const handleReview =  () =>{
+        Swal.fire({
+            title: "Review",
+            text: "Added Successfully",
+            icon: "success"
+          });
+    }
+
   return (
     <div className="py-8 px-4 md:px-8">
       <Helmet>
@@ -14,16 +24,16 @@ const AddReview = () => {
       </div>
 
       <div className="md:w-[500px] lg:w-[600px] xl:w-[900px] py-6">
-      <form className=" md:mx-12 ">
+      <form onSubmit={handleReview} className=" md:mx-12 ">
 {/* -------------------------------- 1 ----------------------------- */}
-         <div className="flex gap-6 flex-col md:flex-row " >
+         <div className="flex gap-6 flex-col lg:flex-row " >
              {/* Property image */}
                <div className="form-control flex-1">
                  <label className="label">
                    <span className="label-text">Property Image</span>
                  </label>
                  <input type="file" name="buyer_email" defaultValue = ""
-                  className=" border border-teal-500 rounded-full" required />
+                  className=" border border-teal-300 rounded-xl" required />
                </div>
 
                 {/* Agent name */}
@@ -62,7 +72,8 @@ const AddReview = () => {
          </div>
 
         <div className="form-control mt-6">
-          <button className="btn  btn-accent">Submit</button>
+          <button
+          className="btn  btn-accent">Submit</button>
         </div>
         
       </form>

@@ -1,6 +1,51 @@
 import { Helmet } from "react-helmet-async";
+import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import LoadingSpiner from "../../components/LoadingSpiner";
+import useGetAProperties from "../../hooks/properties/useGetAproperty";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MakeAnOffer = () => {
+  const params = useParams();
+  const axiosSecure = useAxiosSecure();
+
+  const {data, isPending, refetch} = useGetAProperties(params?.id)
+
+  console.log(params?.id);
+
+  if(isPending)  return <LoadingSpiner/>
+
+  console.log(data);
+
+  const handleOffer = (e) => {
+    e.preventDefault()
+    const offeredAmound = e.target.offered_amount.value; 
+    const buyingDate = e.target.buying_date.value;
+
+    console.log(offeredAmound);
+
+    //  ami kore dei eta? kora ses already..ok
+    const offerInfo = {
+      buyerName: data?.buyerName,
+      buyerEmail: data?.buyerEmail,
+      propertyId: params.id,
+      offeredAmound: parseFloat(offeredAmound),
+      buyingDate,
+      status: "pending",
+    };
+
+    axiosSecure.post("/offers", offerInfo).then((res) => {
+      console.log(res.data);
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: "Your Offer Placed!",
+          text: "Your Offer has ben supplied.",
+          icon: "success",
+        });
+      }
+    });
+  };
+
   return (
     <div className="py-10 pl-3 md:pl-9">
       <Helmet>
@@ -14,90 +59,117 @@ const MakeAnOffer = () => {
       </div>
 
       <div className="md:w-[500px] lg:w-[600px] xl:w-[900px] py-6">
-      <form className=" md:mx-12 ">
-{/* -------------------------------- 1 ----------------------------- */}
-         <div className="flex gap-6 flex-col md:flex-row " >
-             {/* buyer email */}
-               <div className="form-control flex-1">
-                 <label className="label">
-                   <span className="label-text">Buyer Email</span>
-                 </label>
-                 <input type="email" name="buyer_email" defaultValue = ""
-                  className="input input-bordered input-accent w-full" required />
-               </div>
-       
-               {/* buyer name */}
-               <div className="form-control flex-1">
-                 <label className="label">
-                   <span className="label-text"> Buyer Name</span>
-                 </label>
-                 <input type="text" name="buyer_name" placeholder=" Job title" 
-                 className="input input-bordered input-accent w-full" required />
-               </div>
-         </div>
+        <form onSubmit={handleOffer} className=" md:mx-12 ">
+          {/* -------------------------------- 1 ----------------------------- */}
+          <div className="flex gap-6 flex-col md:flex-row ">
+            {/* buyer name */}
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text"> Buyer Name</span>
+              </label>
+              <input
+                type="text"
+                name="buyer_name"
+                defaultValue={data?.buyerName}
+                placeholder=" "
+                className="input input-bordered input-accent w-full"
+                required
+                readOnly
+              />
+            </div>
+            
+            {/* buyer email */}
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Buyer Email</span>
+              </label>
+              <input
+                type="email"
+                name="buyer_email"
+                defaultValue={data?.buyerEmail}
+                className="input input-bordered input-accent w-full"
+                required
+                readOnly
+              />
+            </div>
 
-{/* -------------------------------- 2 ----------------------------- */}
-         <div className="flex gap-6 flex-col md:flex-row " >
-             {/* buying date */}
-               <div className="form-control flex-1">
-                 <label className="label">
-                   <span className="label-text">Buying Date</span>
-                 </label>
-                 <input type="date" name="buying_date" placeholder="Deadline" 
-                 className="input input-bordered input-accent w-full" required />
-               </div>
-               {/* Offered amount. */}
-               <div className="form-control flex-1">
-                 <label className="label">
-                   <span className="label-text">Offered Amount</span>
-                 </label>
-                 <select name="offered_amount" className="input input-bordered input-accent w-full" id="">
-                    <option value="Web development">Web development</option>
-                    <option value="Digital marketing">Digital marketing</option>
-                    <option value="Graphics design">Graphics design</option>
-                 </select>
-               </div>
-         </div>
+          </div>
 
-{/* -------------------------------- 3 ----------------------------- */}
-         <div className="flex gap-6 flex-col md:flex-row " >
-             {/* location  */}
-               <div className="form-control flex-1">
-                 <label className="label">
-                   <span className="label-text">Location </span>
-                 </label>
-                 <input type="text" name="location" placeholder="Maximum price" 
-                 className="input input-bordered input-accent w-full" required />
-               </div>
-       
-               {/* Agent name */}
-               <div className="form-control flex-1">
-                 <label className="label">
-                   <span className="label-text">Agent Name</span>
-                 </label>
-                 <input type="text" name="agent_name" placeholder="Minimum price" 
-                 className="input input-bordered input-accent w-full" required />
-               </div>
-         </div>
+          {/* -------------------------------- 2 ----------------------------- */}
+          <div className="flex gap-6 flex-col md:flex-row ">
+              {/* Agent name */}
+              <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Agent Name</span>
+              </label>
+              <input
+                type="text"
+                name="agent_name"
+                placeholder=""
+                defaultValue={data?.propertyDetails?.agentName}
+                className="input input-bordered input-accent w-full"
+                required
+                readOnly
+                />
+              
+            </div>
+            {/* Offered amount. */}
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Offered Amount</span>
+              </label>
+              <input
+              type="number"
+                name="offered_amount"
+                className="input input-bordered input-accent w-full"
+                id=""
+              />
+            </div>
+          </div>
 
-{/* -------------------------------- 4 ----------------------------- */}
-         <div className="title" >
-             {/* Description */}
-               <div className="form-control ">
-                 <label className="label">
-                   <span className="label-text">Title</span>
-                 </label>
-                 <textarea  type="text" name="description" placeholder="Title" 
-                 className="input input-bordered input-accent w-full" required />
-               </div>
-         </div>
+          {/* -------------------------------- 3 ----------------------------- */}
+          <div className="flex gap-6 flex-col md:flex-row ">
+            {/* location  */}
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Location </span>
+              </label>
+              <input
+                type="text"
+                name="location"
+                placeholder=""
+                defaultValue={data?.propertyDetails?.location}
+                className="input input-bordered input-accent w-full"
+                required
+                readOnly
+              />
+            </div>
 
-        <div className="form-control mt-6">
-          <button className="btn btn-outline btn-accent">Offer</button>
-        </div>
-        
-      </form>
-      
+           
+           {/* buying date */}
+           <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Buying Date</span>
+              </label>
+              <input
+                type="date"
+                name="buying_date"
+                placeholder="buying_date"
+                className="input input-bordered input-accent w-full"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-control mt-6">
+            <button
+           type="submit"
+              className="btn btn-outline btn-accent"
+            >
+              Offer
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

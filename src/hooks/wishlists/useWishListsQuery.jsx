@@ -5,6 +5,8 @@ export default function useWishListsQuery(query) {
 
     const {key, value} = query;
 
+    console.log(key, value);
+
     const axiosSecure = useAxiosSecure()
 
     const {data, isPending, refetch} = useQuery({

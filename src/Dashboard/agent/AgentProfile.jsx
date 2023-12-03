@@ -1,10 +1,16 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Authentication/AuthProvider";
+import LoadingSpiner from "../../components/LoadingSpiner";
+import useGetAUser from "../../hooks/users/useGetAuser";
 
 const AgentProfile = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
+
+  const {data, isPending} = useGetAUser(user?.email)
+
+  if(isPending) return <LoadingSpiner/>
 
   return (
     <div className="pt-10 px-4 md:px-8">
@@ -21,7 +27,7 @@ const AgentProfile = () => {
 
       <div className="flex flex-col md:flex-row gap-10 px-2 md:px-10 py-10">
         <div className="">
-          <img className="h-36" src={user?.photoURL} alt="" />
+          <img className="h-36" src={data?.photoURL} alt="" />
         </div>
         <div className=" ">
           <h1 className="py-2">
@@ -33,6 +39,14 @@ const AgentProfile = () => {
           <h1 className="py-2">
             <span className="font-bold">Login Time :</span>{" "}
             {user?.reloadUserInfo.lastRefreshAt}
+          </h1>
+          <h1 className="py-2">
+            <span className="font-bold">Role :</span>{" "}
+            {data?.role}
+          </h1>
+          <h1 className="py-2">
+            <span className="font-bold">Status :</span>{" "}
+            {data?.status}
           </h1>
         </div>
       </div>

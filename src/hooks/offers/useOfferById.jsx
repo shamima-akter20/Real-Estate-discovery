@@ -1,15 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import axiosPublic from '../../config/axios.config';
 
-export default function useGetProperties(query) {
-
-
+export default function useOfferById(id) {
 
     const {data, isPending, refetch} = useQuery({
-        queryKey: ['getProperties', query],
+        queryKey: ['getOfferById', id],
         queryFn: async()=>{
-            const url = query ? `/properties?${query?.key}=${query?.value}` : '/properties'
-            const res = await axiosPublic.get(url)
+            const res = await axiosPublic.get(`/offers/${id}`)
             return res.data;
         }
     })

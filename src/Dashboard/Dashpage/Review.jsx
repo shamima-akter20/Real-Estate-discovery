@@ -1,17 +1,37 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../Authentication/AuthProvider";
 import LoadingSpiner from "../../components/LoadingSpiner";
 import useReviews from "../../hooks/reviews/useReviews";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Review = () => {
   const { user } = useContext(AuthContext);
 
-  const { data = [], isPending } = useReviews({
+  const axiosSecure = useAxiosSecure()
+
+  const { data = [], isPending, refetch } = useReviews({
     key: "reviewerEmail",
     value: user?.email,
   });
+
+  const handleDelete = id=>{
+    // console.log(id);
+    axiosSecure.delete(`/reviews/${id}`)
+    .then(res=> {
+      console.log(res.data);
+      if(res.data.deletedCount){
+        refetch()
+        // alert('review delted')
+        Swal.fire({
+          title: "Review",
+          text: "Deleted Successfully",
+          icon: "success"
+        });
+      }
+    })
+  }
 
   if (isPending) return <LoadingSpiner />;
 
@@ -31,11 +51,7 @@ const Review = () => {
 
       <div className="py-3 md:py-10">
         
-     <div className="py-6">
-      <Link to="/dashboard/addReview">
-     <button className="btn btn-active btn-neutral w-full ">Add Review</button>
-     </Link>
-     </div>
+    
 
 
         {data?.map((review) => (
@@ -43,15 +59,13 @@ const Review = () => {
             {/* {Object.keys(review).join(',')} */}
             <div className="flex flex-col md:flex-row justify-between items-center gap-10 p-0 ">
               <div>
-                <h1 className="text-base font-semibold">Propert Title :</h1>
-                <h1 className="text-sm font-semibold">Agent Name : </h1>
+                <h1 className="text-base font-semibold">Propert Title : {review?.propertyDetails?.propertyTitle}</h1>
+                <h1 className="text-sm font-semibold">Agent Name : {review?.propertyDetails?.agentName} </h1>
                 <p className="block font-sans text-xs md:text-base antialiased font-light leading-relaxed text-inherit">
-                  I found solution to all my design needs from Creative Tim. I
-                  use them as a freelancer in my hobby projects for fun! And its
-                  really affordable, very humble guys !!!
+                 {review?.reviewDescription}
                 </p>
-                <h1 className="text-sm">Review Time : </h1>
-                <button className="btn  w-full">
+                <h1 className="text-sm">Review Time : {review?.ratingTime} </h1>
+                <button onClick={()=>handleDelete(review?._id)} className="btn  w-full">
                   <i className="fa-solid fa-trash-can"></i>
                 </button>
               </div>

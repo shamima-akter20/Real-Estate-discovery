@@ -1,7 +1,29 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import LoadingSpiner from "../../components/LoadingSpiner";
+import useOffersQuery from "../../hooks/offers/useOffersQuery";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const RequestedProperties = () => {
+  const {data = [], isPending, refetch} = useOffersQuery({key: 'status', value: 'pending'})
+
+  const axiosSecure = useAxiosSecure()
+  if(isPending) return <LoadingSpiner/>
+
+ console.log(data);
+
+ const handleAccept = id => {
+  axiosSecure.patch(`/offers/${id}`, {status: 'accepted'})
+  .then(res=> {
+    console.log(res.data);
+    if(res.data.modifiedCount){
+      refetch()
+      Swal.fire('Accepted Your request.')
+    }
+  })
+
+ }
+
   return (
     <div className="pt-10 px-4 md:px-8">
       <Helmet>
@@ -14,7 +36,8 @@ const RequestedProperties = () => {
         </h1>
       </div>
 
-      <div className="flex pt-6 xl:gap-12 rounded-xl mb-8 text-gray-700 shadow-md xl:w-[900px]  flex-col md:flex-row">
+      {data?.map(requested=> (
+        <div key={requested?._id} className="flex pt-6 xl:gap-12 rounded-xl mb-8 text-gray-700 shadow-md xl:w-[900px]  flex-col md:flex-row">
        
         <div className="px-6 py-4">
           <h6 className="mb-2 font-bold  text-xl xl:text-2xl antialiased leading-relaxed tracking-normal text-gray-700 ">
@@ -37,19 +60,20 @@ const RequestedProperties = () => {
             <i className="fa-solid fa-location-dot mr-2"></i> Location :
           </p>
 
-          <Link to="/dashboard/update">
-            <button className="btn btn-sm btn-outline btn-accent">
+          
+            <button onClick={()=> handleAccept(requested?._id)} className="btn btn-sm btn-outline btn-accent">
               Accept
             </button>
-          </Link>
+       
 
-          <Link to="" className="px-4">
-            <button className="btn btn-sm btn-outline btn-accent">
+          
+            <button onClick={()=>handleReject(requested?._id)} className="btn btn-sm btn-outline btn-accent">
               Reject
             </button>
-          </Link>
+          
         </div>
       </div>
+      ))}
     </div>
   );
 };

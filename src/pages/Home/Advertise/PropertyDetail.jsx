@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../../Authentication/AuthProvider";
 import LoadingSpiner from "../../../components/LoadingSpiner";
 import useGetAProperties from "../../../hooks/properties/useGetAproperty";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import ReviewModal from "./ReviewModal";
 
 const PropertyDetail = () => {
   const params = useParams();
@@ -14,21 +16,11 @@ const PropertyDetail = () => {
   const { data = {}, isPending } = useGetAProperties(params.id);
   const navigate = useNavigate();
 
-  // const {
-  //   data: addWish,
-  //   mutate,
-  //   status,
-  // } = useMutation({
-  //   mutationKey: ["addtoWishlist"],
-  //   mutationFn: async (wishData) => {
-  //     const res = await axiosSecure.post("/wishlists", wishData);
-  //     return res.data;
-  //   },
-  // });
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen((cur) => !cur);
 
   if (isPending) return <LoadingSpiner />;
-  // uporer data gulo ki bosaysen Ui te ?
-  // console.log(Object.keys(data).join(','));
+
   const {
     _id,
     image,
@@ -54,13 +46,19 @@ const PropertyDetail = () => {
     axiosSecure.post("/wishlists", wishData).then((res) => {
       console.log("inserted wishlist", res.data);
       if (res.data?.insertedId) {
-        alert("wishlist added");
+        Swal.fire({
+          title: "",
+          text: "Successfully added to Whishlist",
+          icon: "success",
+        });
+
         navigate("/dashboard/whishlist");
       }
     });
   };
 
   return (
+    <>
     <div className="">
       <Helmet>
         <title>Property Detail - Elite Estate Discoveries</title>
@@ -91,12 +89,8 @@ const PropertyDetail = () => {
             </p>
 
             <div className="flex items-center gap-2 mb-2 mt-2 bg-slate-100 w-36 p-2 rounded-2xl ">
-              <img
-                className="h-6 w-6 rounded-full"
-                src="https://i.ibb.co/30ZghNN/kkk.jpg"
-                alt=""
-              />
-              <h1 className="text-xs font-display">Locky Jane</h1>
+              <img className="h-6 w-6 rounded-full" src={agentImage} alt="" />
+              <h1 className="text-xs font-display">{agentName}</h1>
             </div>
 
             {/* <Link to="/dashboard/whishlist"> */}
@@ -106,11 +100,22 @@ const PropertyDetail = () => {
             >
               Add to Wishlist
             </button>
+
+            <div className="py-6">
+              {/* <Link to="/addReview"> */}
+                <button onClick={() => document.getElementById("my_modal_1").showModal()} className="btn btn-active btn-neutral w-full ">
+                  Add Review
+                </button>
+              {/* </Link> */}
+            </div>
+
             {/* </Link> */}
           </div>
         </div>
       </div>
     </div>
+      <ReviewModal data={data}/>
+      </>
   );
 };
 

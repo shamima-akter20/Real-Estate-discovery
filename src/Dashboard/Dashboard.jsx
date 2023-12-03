@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-  const role = "user"; 
+  const role = "admin"; 
   return (
     <div className="flex mx-4 md:mx-8 lg:mx-16 xl:mx-36 ">
       <div className="w-46 min-h-full bg-teal-100 text-teal-600 font-bold rounded-b-2xl">
@@ -43,6 +43,13 @@ const Dashboard = () => {
                 <i className="fa-solid fa-user"></i> Agent Profile
               </NavLink>
             </li>
+
+            <li>
+              <NavLink to="/dashboard/addProperty">
+                <i className="fa-solid fa-plus"></i> Add Property
+              </NavLink>
+            </li>
+            
             <li>
               <NavLink to="/dashboard/agentAddedProperties">
                 <i className="fa-solid fa-list-ul"></i> My Added Properties

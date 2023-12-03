@@ -1,5 +1,6 @@
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import { app } from "./Firebase/firebase.config";
 
 
@@ -7,10 +8,12 @@ export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
-const AuthProvider = ({children}) => {
-   const [user, setUser] = useState(null); 
-   const [loading, setLoading] = useState(true);
 
+const AuthProvider = ({children}) => {
+  const [user, setUser] = useState(null); 
+  const [loading, setLoading] = useState(true);
+  
+  const axiosSecure = useAxiosSecure()
    const googleSignIn = () => {
     return signInWithPopup(auth, googleProvider);
    }
@@ -40,8 +43,19 @@ const AuthProvider = ({children}) => {
    useEffect(() =>{
     const unsubscribe = onAuthStateChanged(auth, currentUser =>{
         setUser(currentUser);
-        console.log('current', currentUser);
         setLoading(false);
+        if(currentUser){
+          axiosSecure.post('/createToken', {email: currentUser?.email})
+          .then(()=> {
+            console.log('token created');
+          })
+        }else{
+          axiosSecure.delete('/deleteToken')
+          .then(()=>{
+            console.log('token Deleted');
+          })
+        }
+        
       });
       return () => {
         return unsubscribe();

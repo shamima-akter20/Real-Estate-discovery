@@ -38,6 +38,14 @@ console.log(data);
             <span className="font-bold">Login Time :</span>{" "}
             {user?.reloadUserInfo.lastRefreshAt}
           </h1>
+          {data?.role !== 'user' && <h1 className="py-2">
+            <span className="font-bold">Role :</span>{" "}
+            {data?.role}
+          </h1>}
+          <h1 className="py-2">
+            <span className="font-bold">Status :</span>{" "}
+            {data?.status}
+          </h1>
         </div>
       </div>
     </div>
