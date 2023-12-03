@@ -34,7 +34,7 @@ if(isPending) return <LoadingSpiner/>
             <div className="card-body">
             <h1 className="font-bold">Verification Status : {item.verification_status}</h1>
               <h2 className="card-title text-2xl font-bold">
-              <i className="fa-solid fa-location-dot"></i>Location : 
+              <i className="fa-solid fa-location-dot"></i>Location : {item?.location}
               </h2>
               <h3 className="text-base font-bold gap-3">
               <i className="fa-solid fa-dollar-sign mr-2"></i>Price : {item.price}

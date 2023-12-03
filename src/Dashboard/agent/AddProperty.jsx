@@ -1,27 +1,19 @@
+import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Authentication/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddProperty =  () => {
   const axiosSecure = useAxiosSecure();
+  const {user} = useContext(AuthContext)
 // image ta ekhon host korte hobe..
   const handlePropertyAdd = async(e) => {
     e.preventDefault();
 
-    const imageData = e.target.buyer_image.files[0]
-
-  //   console.log(imageData);
-
-  //  const res = await uploadImage(imageData)
-  //  console.log(res);
-
-    // mutateAsync(imageData)
-    // .then(res=> {
-    //     console.log(res.data);
-    // })
 
     const form = e.target;
-    // const buyer_image = form.buyer_image.files[0];
+    const buyer_image = form.buyer_image.value;
     const location = form.location.value;
     const agent_name = form.agent_name.value;
     const agent_email = form.agent_email.value;
@@ -33,7 +25,7 @@ const AddProperty =  () => {
     // console.dir();
 
     const propertyInfo = {
-      // image: buyer_image,
+      image: buyer_image,
       location,
       agentEmail: agent_email,
       agentName: agent_name,
@@ -41,8 +33,10 @@ const AddProperty =  () => {
       minPrice: min_price,
       price: `${min_price} - ${max_price}`,
       propertyTitle: property_title,
-      description,
+      propertyDescription: description,
     };
+
+    console.log(propertyInfo);
 
     axiosSecure
       .post("/properties", propertyInfo) 
@@ -78,13 +72,14 @@ const AddProperty =  () => {
               {/* Property image */}
               <div className="form-control flex-1">
                 <label className="label">
-                  <span className="label-text">{}</span>
+                  <span className="label-text">Image URL</span>
                 </label>
                 <input
-                  type="file"
+                  type="url"
                   name="buyer_image"
                   defaultValue=""
-                  className=" border border-teal-500 rounded-full"
+                  placeholder="Image URL"
+                  className="input input-bordered input-accent w-full "
                   required
                 />
               </div>
@@ -114,6 +109,8 @@ const AddProperty =  () => {
                 <input
                   type="text"
                   name="agent_name"
+                  readOnly
+                  defaultValue={user?.displayName}
                   placeholder="Agent Name"
                   className="input input-bordered input-accent w-full"
                   required
@@ -134,6 +131,8 @@ const AddProperty =  () => {
                   placeholder="Agent Email."
                   className="input input-bordered input-accent w-full"
                   required
+                  readOnly
+                  defaultValue={user?.email}
                 />
               </div>
             </div>

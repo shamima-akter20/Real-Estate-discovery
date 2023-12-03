@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Authentication/AuthProvider";
 import LoadingSpiner from "../../components/LoadingSpiner";
 import useGetAProperties from "../../hooks/properties/useGetAproperty";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -9,9 +11,11 @@ const MakeAnOffer = () => {
   const params = useParams();
   const axiosSecure = useAxiosSecure();
 
+  const {user} = useContext(AuthContext)
+
   const {data, isPending, refetch} = useGetAProperties(params?.id)
 
-  console.log(params?.id);
+  // console.log(params?.id);
 
   if(isPending)  return <LoadingSpiner/>
 
@@ -26,8 +30,9 @@ const MakeAnOffer = () => {
 
     //  ami kore dei eta? kora ses already..ok
     const offerInfo = {
-      buyerName: data?.buyerName,
-      buyerEmail: data?.buyerEmail,
+      buyerName: user?.displayName,
+      buyerEmail: user?.email,
+      buyerImage: user?.photoURL,
       propertyId: params.id,
       offeredAmound: parseFloat(offeredAmound),
       buyingDate,
@@ -70,7 +75,7 @@ const MakeAnOffer = () => {
               <input
                 type="text"
                 name="buyer_name"
-                defaultValue={data?.buyerName}
+                defaultValue={user?.displayName}
                 placeholder=" "
                 className="input input-bordered input-accent w-full"
                 required
@@ -86,7 +91,7 @@ const MakeAnOffer = () => {
               <input
                 type="email"
                 name="buyer_email"
-                defaultValue={data?.buyerEmail}
+                defaultValue={user?.email}
                 className="input input-bordered input-accent w-full"
                 required
                 readOnly
@@ -106,7 +111,7 @@ const MakeAnOffer = () => {
                 type="text"
                 name="agent_name"
                 placeholder=""
-                defaultValue={data?.propertyDetails?.agentName}
+                defaultValue={data?.agentName}
                 className="input input-bordered input-accent w-full"
                 required
                 readOnly
@@ -138,7 +143,7 @@ const MakeAnOffer = () => {
                 type="text"
                 name="location"
                 placeholder=""
-                defaultValue={data?.propertyDetails?.location}
+                defaultValue={data?.location}
                 className="input input-bordered input-accent w-full"
                 required
                 readOnly

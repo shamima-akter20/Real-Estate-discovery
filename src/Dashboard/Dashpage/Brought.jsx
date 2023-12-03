@@ -14,6 +14,7 @@ const Brought = () => {
     isPending,
     refetch,
   } = useOffersQuery({ key: "buyerEmail", value: user?.email });
+
   const axiosSecure = useAxiosSecure()
 
   if (isPending) return <LoadingSpiner />;
@@ -65,14 +66,14 @@ const Brought = () => {
           <div key={bought?._id} className=" flex xl:gap-12 rounded-xl mb-8 text-gray-700 shadow-md xl:w-[900px]  flex-col md:flex-row">
             <div className="md:w-3/4 xl:w-2/5">
               <img
-                src="https://i.ibb.co/k5PBTR1/e2.jpg"
+                src={bought?.propertyDetails?.image}
                 className="bg-cover w-full h-full"
               />
             </div>
 
             <div className="p-6">
               <h6 className="mb-2 font-bold  text-xl xl:text-2xl antialiased leading-relaxed tracking-normal text-gray-700 ">
-                Title
+              {bought?.propertyDetails?.propertyTitle}
               </h6>
 
               <p className=" font-sans text-xs md:text-base antialiased  text-gray-500">
@@ -80,12 +81,11 @@ const Brought = () => {
               </p>
 
               <p className=" font-sans text-xs md:text-base antialiased  text-gray-500">
-                <i className="fa-solid fa-location-dot mr-2"></i> Location :
+                <i className="fa-solid fa-location-dot mr-2"></i> Location : {bought?.propertyDetails?.location}
               </p>
 
               <p className="block mb-2 font-sans text-xs md:text-base antialiased  leading-relaxed text-gray-500">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Repudiandae, similique!
+              {bought?.propertyDetails?.propertyDescription}
               </p>
 
               <p className=" font-sans text-xs md:text-sm antialiased  text-gray-500">
@@ -95,26 +95,28 @@ const Brought = () => {
               <div className="flex items-center gap-2 mb-2 mt-2 bg-slate-100 w-36 p-2 rounded-2xl ">
                 <img
                   className="h-6 w-6 rounded-full"
-                  src="https://i.ibb.co/30ZghNN/kkk.jpg"
+                  src={bought?.buyerImage  || ''}
                   alt=""
                 />
                 <h1 className="text-xs font-display">{bought.buyerName}</h1><br />
               </div> 
 
-              <Link to={`/dashboard/makeOffer/${bought?._id}`}>
+              {
+                bought?.status == 'accepted' && <Link to={`/dashboard/paymentPage/${bought?.propertyDetails?._id}`}>
                 <button className="btn btn-sm btn-outline btn-accent">
-                  Make an offer
+                  Pay Now 
                 </button>
               </Link>
 
-              <Link to="" className="px-4">
+              }
+              {/* <Link to="" className="px-4">
                 <button
                   onClick={() => handleRemove(bought?._id)}
                   className="btn btn-sm btn-outline btn-accent"
                 >
                   Remove
                 </button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         ))}

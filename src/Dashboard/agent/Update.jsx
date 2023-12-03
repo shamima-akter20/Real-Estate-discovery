@@ -20,18 +20,6 @@ const Update = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
 
-    const imageData = e.target.buyer_image.files[0];
-
-    //   console.log(imageData);
-
-    //  const res = await uploadImage(imageData)
-    //  console.log(res);
-
-    // mutateAsync(imageData)
-    // .then(res=> {
-    //     console.log(res.data);
-    // })
-
     const form = e.target;
     // const buyer_image = form.buyer_image.files[0];
     const location = form.location.value;

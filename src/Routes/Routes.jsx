@@ -11,6 +11,7 @@ import ManageUsers from '../Dashboard/Admin/ManageUsers';
 import Dashboard from '../Dashboard/Dashboard';
 import Brought from '../Dashboard/Dashpage/Brought';
 import MyProfile from '../Dashboard/Dashpage/MyProfile';
+import Payment from '../Dashboard/Dashpage/Payment';
 import Review from '../Dashboard/Dashpage/Review';
 import AddProperty from '../Dashboard/agent/AddProperty';
 import AgentAddedProperties from '../Dashboard/agent/AgentAddedProperties';
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
             {
                 path:'makeOffer/:id',
                 element:<MakeAnOffer></MakeAnOffer> ,
+            },
+            {
+                path:'paymentPage/:id',
+                element:<Payment/>
             },
             /**********  agent routes ************** */
            {

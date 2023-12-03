@@ -1,6 +1,15 @@
+import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../Authentication/AuthProvider";
+import LoadingSpiner from "../../components/LoadingSpiner";
+import useOffersQuery from "../../hooks/offers/useOffersQuery";
 
 const AgentSoldProperties = () => {
+  const {user, isPending} = useContext(AuthContext)
+
+  const {data} = useOffersQuery({key: "buyerEmail" ,value: user?.email})
+  if(isPending) return <LoadingSpiner/>
+  console.log(data);
   return (
     <div className="py-10 pl-3 md:pl-9">
       <Helmet>

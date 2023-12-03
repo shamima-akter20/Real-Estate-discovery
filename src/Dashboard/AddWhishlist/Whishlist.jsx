@@ -46,7 +46,7 @@ const Whishlist = () => {
   };
 
   if (isPending) return <LoadingSpiner />;
-  // console.log(data);
+  console.log(data);
 
   return (
     <div className="py-8 px-4 md:px-8">
@@ -109,7 +109,7 @@ const Whishlist = () => {
                 </h1>
               </div>
 
-              <Link to={`/dashboard/makeOffer/${wishlist?._id}`}>
+              <Link to={`/dashboard/makeOffer/${wishlist?.propertyDetails?._id}`}>
                 <button className="btn btn-sm btn-outline btn-accent">
                   Make an offer
                 </button>

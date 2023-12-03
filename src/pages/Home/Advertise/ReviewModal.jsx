@@ -18,6 +18,7 @@ export default function ReviewModal({ data }) {
     const reviewInfo = {
       reviewerName: user?.displayName,
       reviewerEmail: user?.email,
+      reviewerImage: user?.photoURL,
       reviewDescription: review,
       agentName: data?.agentName,
       propertyId: data?._id,
@@ -49,16 +50,14 @@ export default function ReviewModal({ data }) {
         
           <div className="py-4">
             <form onSubmit={handleReview}>
-              <textarea name="review" className="w-full"></textarea>
-              <input type="submit" value="Review" />
+              <h1 className="font-display ml-2 mb-4 text-teal-500">Review</h1>
+              <textarea name="review" required className="w-full rounded-xl textarea input-accent"></textarea>
+              {/* <input type="submit"  /> */}
+              <input type="submit" className="mt-3  w-full btn btn-active btn-accent" value="Submit" />
             </form>
           </div>
-          <div className="modal-action">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Close</button>
-            </form>
-          </div>
+
+        
         </div>
       </dialog>
     </>
