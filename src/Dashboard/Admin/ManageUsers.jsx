@@ -61,7 +61,19 @@ const ManageUsers = () => {
   }
 
   const handleFraud = id=> {
-    axiosSecure.patch(`/users/${id}`, {status: 'blocked'})
+    axiosSecure.patch(`/users/${id}`, {role: 'fraud', status: 'blocked'})
+    .then(res=> {
+      console.log(res.data);
+      if(res.data.modifiedCount){
+        refetch()
+        Swal.fire('Role set as Fraude') // eta thik kore diyen ami banglish likhlam.. 
+      }
+    })
+  }
+
+  
+  const handleUser = id=> {
+    axiosSecure.patch(`/users/${id}`, {role: 'user'})
     .then(res=> {
       console.log(res.data);
       if(res.data.modifiedCount){
@@ -142,12 +154,12 @@ const ManageUsers = () => {
                       }
 
                       {
-                        user?.status === 'fraud' ? <div>Fruad</div> : <button onClick={()=> handleAgent(user?._id)} className="btn btn-active btn-accent">
-                        <i className="fa-solid fa-user-tie "></i>Make Agent
+                        user?.status === 'fraud' ? <div>Fruad</div> : <button onClick={()=> handleUser(user?._id)} className="btn btn-active btn-accent">
+                        <i className="fa-solid fa-user-tie "></i>Make User
                       </button>
                       }
                       
-                      <button className="btn btn-active btn-accent">
+                      <button onClick={()=> handleFraud(user?._id)} className="btn btn-active btn-accent">
                         <i className="fa-solid fa-user-secret"></i>Make as Fraud
                       </button>
                       <button onClick={()=> handleDelete(user?._id)} className="btn btn-active btn-accent">
@@ -171,8 +183,8 @@ const ManageUsers = () => {
                     <h2 className="text-base font-semibold py-2">Email : {user?.email}</h2>
 
                     <div className="flex flex-col gap-3">
-                      <button onClick={()=> handleAdmin(user?._id)} className="btn btn-active btn-accent ">
-                        <i className="fa-solid fa-user-gear "></i>Make Admin
+                      <button onClick={()=> handleUser(user?._id)} className="btn btn-active btn-accent ">
+                        <i className="fa-solid fa-user-gear "></i>Make user
                       </button>
                       <button onClick={()=> handleAgent(user?._id)} className="btn btn-active btn-accent">
                         <i className="fa-solid fa-user-tie "></i>Make Agent

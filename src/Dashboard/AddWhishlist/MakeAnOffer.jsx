@@ -43,6 +43,7 @@ const MakeAnOffer = () => {
       buyerName: user?.displayName,
       buyerEmail: user?.email,
       buyerImage: user?.photoURL,
+      propertyTitle: data?.propertyTitle,
       propertyId: params.id,
       offeredAmound: parseFloat(offeredAmound),
       buyingDate,

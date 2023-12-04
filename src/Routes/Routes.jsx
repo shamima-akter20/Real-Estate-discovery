@@ -19,6 +19,7 @@ import AgentProfile from '../Dashboard/agent/AgentProfile';
 import AgentSoldProperties from '../Dashboard/agent/AgentSoldProperties';
 import RequestedProperties from '../Dashboard/agent/RequestedProperties';
 import Update from '../Dashboard/agent/Update';
+import Error from '../Error/Error';
 import AllProperties from '../pages/AllProperties.jsx/AllProperties';
 import PropertyDetail from '../pages/Home/Advertise/PropertyDetail';
 import Home from '../pages/Home/Home';
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element:<Main></Main> ,
+        errorElement:<Error></Error>,
         children:[
             {
                 path:'/',

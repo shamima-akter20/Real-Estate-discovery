@@ -34,37 +34,41 @@ const AgentSoldProperties = () => {
         </h1>
       </div>
 
-      <div className="flex pt-12 xl:gap-12 rounded-xl mb-8 text-gray-700 shadow-md xl:w-[900px]  flex-col md:flex-row">
+      {
+        data?.map(sold=> (
+          <div key={sold?._id} className="flex pt-12 xl:gap-12 rounded-xl mb-8 text-gray-700 shadow-md xl:w-[900px]  flex-col md:flex-row">
         <div className="md:w-3/4 xl:w-2/5">
           <img
-            src="https://i.ibb.co/k5PBTR1/e2.jpg"
+            src={sold?.propertyImage || ''}
             className="bg-cover w-full h-full"
           />
         </div>
 
         <div className="p-6">
           <h6 className="mb-2 font-bold  text-xl xl:text-2xl antialiased leading-relaxed tracking-normal text-gray-700 ">
-            Title
+            {sold?.propertyTitle}
           </h6>
 
           <p className=" font-sans text-xs md:text-base font-bold antialiased  text-gray-500">
-            Buyer Name:
+            Buyer Name: {sold?.buyerName}
           </p>
 
           <p className=" font-sans text-xs md:text-base font-bold  antialiased  text-gray-500">
-           Buyer Email :
+           Buyer Email : {sold?.buyerEmail}
           </p>
 
           <p className=" font-sans text-xs md:text-base antialiased  text-gray-500">
-            <i className="fa-solid fa-dollar-sign mr-2"></i> Sold Price :
+            <i className="fa-solid fa-dollar-sign mr-2"></i> Sold Price : {sold?.offeredAmound}
           </p>
 
           <p className=" font-sans text-xs md:text-base antialiased  text-gray-500">
-            <i className="fa-solid fa-location-dot mr-2"></i> Location :
+            <i className="fa-solid fa-location-dot mr-2"></i> Location : {sold?.location || ''}
           </p>
           
         </div>
       </div>
+        ))
+      }
     </div>
   );
 };

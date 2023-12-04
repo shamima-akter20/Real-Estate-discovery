@@ -40,8 +40,10 @@ export default function Checkout() {
     
     if(isPending) return <LoadingSpiner/>
 
+    console.log(data);
     const handleSubmit = async e => {
         e.preventDefault()
+
         
         if(!stripe || !stripeElement) return;
 
@@ -88,8 +90,9 @@ export default function Checkout() {
                   buyerEmail: user.email,
                   offeredAmound: data?.offeredAmound,
                   transactionId: paymentIntent.id,
-                  agentName: data?.agentName,
-                  agentEmail: data?.agentEmail,
+                  agentName: data?.propertyDetails?.agentName,
+                  propertyImage: data?.propertyDetails?.image,
+                  agentEmail: data?.propertyDetails?.agentEmail,
                   date: new Date(), // utc date convert. use moment js to 
                   offerId: data?._id,
                   propertyId: data?.propertyDetails?._id,

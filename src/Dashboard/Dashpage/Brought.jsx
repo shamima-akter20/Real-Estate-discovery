@@ -100,6 +100,7 @@ const Brought = () => {
                 />
                 <h1 className="text-xs font-display">{bought.buyerName}</h1><br />
               </div> 
+              
 
               {
                 bought?.status == 'accepted' && <Link to={`/dashboard/paymentPage/${bought?._id}`}>

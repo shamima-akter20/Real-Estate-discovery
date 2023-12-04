@@ -4,7 +4,7 @@ import { AuthContext } from "../Authentication/AuthProvider";
 import useGetUserRole from "../hooks/useGetUserRole";
 
 const Dashboard = () => {
-  // const role = "user"; 
+  // const role = "admin"; 
   const {user} = useContext(AuthContext)
 
   const role = useGetUserRole(user?.email || '')
