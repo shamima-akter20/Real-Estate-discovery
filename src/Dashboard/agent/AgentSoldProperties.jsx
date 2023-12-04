@@ -1,13 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Authentication/AuthProvider";
 import LoadingSpiner from "../../components/LoadingSpiner";
-import useOffersQuery from "../../hooks/offers/useOffersQuery";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AgentSoldProperties = () => {
-  const {user, isPending} = useContext(AuthContext)
+  const {user} = useContext(AuthContext)
 
-  const {data} = useOffersQuery({key: "buyerEmail" ,value: user?.email})
+  const axiosSecure = useAxiosSecure()
+
+  const {data, isPending} = useQuery({
+    queryKey: ["getBoughtProperty"],
+    queryFn: async()=>{
+      if(user){
+
+        const res = await axiosSecure.get(`/boughtProperties/${user?.email}`)
+        return res.data;
+      }
+    }
+  })
   if(isPending) return <LoadingSpiner/>
   console.log(data);
   return (

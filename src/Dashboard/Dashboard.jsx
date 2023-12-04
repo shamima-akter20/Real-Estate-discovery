@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../Authentication/AuthProvider";
+import useGetUserRole from "../hooks/useGetUserRole";
 
 const Dashboard = () => {
-  const role = "user"; 
+  // const role = "user"; 
   const {user} = useContext(AuthContext)
 
-  // const role = useGetUserRole(user?.email || '')
+  const role = useGetUserRole(user?.email || '')
 
   // console.log(role);
   

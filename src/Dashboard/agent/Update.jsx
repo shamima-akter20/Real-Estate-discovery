@@ -83,9 +83,9 @@ const Update = () => {
               <input
                 type="file"
                 name="buyer_image"
-                defaultValue={data?.image}
+                defaultValue={data?.propertyImage}
                 className=" border border-teal-500 rounded-full"
-                required
+                
               />
             </div>
           </div>
@@ -115,6 +115,7 @@ const Update = () => {
               <input
                 type="text"
                 name="agent_name"
+                defaultValue={data?.agentName}
                 placeholder="Agent Name"
                 className="input input-bordered input-accent w-full"
                 required
@@ -132,6 +133,7 @@ const Update = () => {
               <input
                 type="email"
                 name="agent_email"
+                defaultValue={data?.agentEmail}
                 placeholder="Agent Email."
                 className="input input-bordered input-accent w-full"
                 required
@@ -149,6 +151,7 @@ const Update = () => {
                 type="text"
                 name="max_price"
                 placeholder="Maximum Price "
+                defaultValue={data?.maxPrice}
                 className="input input-bordered input-accent w-full"
                 required
               />
@@ -163,6 +166,7 @@ const Update = () => {
                 type="text"
                 name="min_price"
                 placeholder="Minimun Price "
+                defaultValue={data?.minPrice}
                 className="input input-bordered input-accent w-full"
                 required
               />
@@ -178,6 +182,7 @@ const Update = () => {
               <input
                 type="text"
                 name="property_title"
+                defaultValue={data?.propertyTitle}
                 placeholder=" Property title"
                 className="input input-bordered input-accent w-full"
                 required
@@ -194,6 +199,7 @@ const Update = () => {
               <textarea
                 type="text"
                 name="description"
+                defaultValue={data?.propertyDescription}
                 placeholder="Description"
                 className="input input-bordered input-accent w-full"
                 required

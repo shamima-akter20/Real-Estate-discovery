@@ -85,9 +85,11 @@ export default function Checkout() {
 
               // now save the payment in the database
               const payment = {
-                  email: user.email,
-                  price: data?.offeredAmound,
+                  buyerEmail: user.email,
+                  offeredAmound: data?.offeredAmound,
                   transactionId: paymentIntent.id,
+                  agentName: data?.agentName,
+                  agentEmail: data?.agentEmail,
                   date: new Date(), // utc date convert. use moment js to 
                   offerId: data?._id,
                   propertyId: data?.propertyDetails?._id,
