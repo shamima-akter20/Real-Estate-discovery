@@ -102,7 +102,7 @@ const Brought = () => {
               </div> 
 
               {
-                bought?.status == 'accepted' && <Link to={`/dashboard/paymentPage/${bought?.propertyDetails?._id}`}>
+                bought?.status == 'accepted' && <Link to={`/dashboard/paymentPage/${bought?._id}`}>
                 <button className="btn btn-sm btn-outline btn-accent">
                   Pay Now 
                 </button>

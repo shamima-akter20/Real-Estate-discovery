@@ -23,10 +23,20 @@ const MakeAnOffer = () => {
 
   const handleOffer = (e) => {
     e.preventDefault()
-    const offeredAmound = e.target.offered_amount.value; 
+    const offeredAmound = e.target.offered_amount.value.trim(); 
     const buyingDate = e.target.buying_date.value;
 
-    console.log(offeredAmound);
+    console.log(Number(data?.maxPrice));
+    console.log('minimum price ', Number(offeredAmound) < Number(data?.minPrice));
+    console.log('maximum price ', Number(offeredAmound) > Number(data?.maxPrice));
+
+    if(Number(offeredAmound) < Number(data?.minPrice) || Number(offeredAmound) > Number(data?.maxPrice)){
+      return Swal.fire({
+        icon: 'error',
+        title: 'Out of Range',
+        text: "Your offered amount is out of range."
+      })
+    }
 
     //  ami kore dei eta? kora ses already..ok
     const offerInfo = {
@@ -92,7 +102,7 @@ const MakeAnOffer = () => {
                 type="email"
                 name="buyer_email"
                 defaultValue={user?.email}
-                className="input input-bordered input-accent w-full"
+                className="input input-bordered inp0ut-accent w-full"
                 required
                 readOnly
               />

@@ -154,7 +154,7 @@ const SignIn = () => {
                     </label>
                     <input
                       type="text"
-                      {...register("url", { required: true })}
+                      {...register("photoURL", { required: true })}
                       placeholder="Photo URL"
                       className="input input-bordered"
                     />
