@@ -107,8 +107,8 @@ const Brought = () => {
                   Pay Now 
                 </button>
               </Link>
-
               }
+              {bought?.transactionId && <p> TransactionId: {bought?.transactionId}</p>}
               {/* <Link to="" className="px-4">
                 <button
                   onClick={() => handleRemove(bought?._id)}
